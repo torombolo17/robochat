@@ -1,10 +1,9 @@
-var path = '/home/ricky/Documents/projects/robochat/roboclient.html'
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-  res.sendFile(path);
+  res.render('roboclient', {layout: false});
 });
 
 io.on('connection', function(socket){
