@@ -1,6 +1,14 @@
-var app = require('express')();
+/*var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+*/
+
+
+var io = require('socket.io');
+var server = http.createServer();
+server.listen(port, ipAddress);
+var socket = io.listen(server);
+
 
 app.get('/', function(req, res){
   res.render('roboclient', {layout: false});
