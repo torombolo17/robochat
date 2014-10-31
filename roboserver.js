@@ -1,4 +1,4 @@
-var path = '/home/ricky/Documents/projects/robochat/roboclient.html'
+var path = '/roboclient.html'
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
