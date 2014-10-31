@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-var path = '/roboclient.html'
->>>>>>> 4d390323eede465ac16574566be474098166d705
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
