@@ -57,7 +57,7 @@ io.configure(function () {
 
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  res.sendfile(__dirname + '/roboclient.html');
 });
 
 // usernames which are currently connected to the chat
