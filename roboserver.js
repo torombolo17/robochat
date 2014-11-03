@@ -1,16 +1,21 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+// Variable port setting for heroku
 
+var port = process.env.PORT || 3000;
 
-//var dir = "/Users/P3LL0/Google\ Drive/RoboChat/RoboChat\ Pello/";
+var app = require('express').createServer()
+var io = require('socket.io').listen(app);
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+app.listen(port);
+
+// Heroku setting for long polling - assuming io is the Socket.IO server object
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
 });
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname +'index.html');
+// routing
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/roboclient.html');
 });
 
 
