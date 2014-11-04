@@ -37,6 +37,10 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('updateusers', usernames);
     });
 
+    socket.on('chat message', function(msg){
+      console.log('message: ' + msg);
+      io.sockets.emit('updatechat', socket.username, data);
+    });
 
     socket.on('disconnect', function(){
         // remove the username from global usernames list
@@ -46,13 +50,6 @@ io.sockets.on('connection', function (socket) {
         // echo globally that this client has left
         socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
     });
-
-
-    socket.on('chat message', function(msg){
-      console.log('message: ' + msg);
-      io.sockets.emit('chat message', msg);
-    });
-
   
 });
 

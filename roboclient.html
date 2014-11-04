@@ -31,6 +31,19 @@
         socket.emit('adduser', prompt("What's your name?"));
       });
 
+      // listener, whenever the server emits 'updatechat', this updates the chat body
+      socket.on('updatechat', function (username, data) {
+        $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+      });
+
+      // listener, whenever the server emits 'updateusers', this updates the username list
+      socket.on('updateusers', function(data) {
+        $('#users').empty();
+        $.each(data, function(key, value) {
+            $('#users').append('<div>' + key + '</div>');
+        });
+      });
+
       $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
