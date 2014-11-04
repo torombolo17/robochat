@@ -1,45 +1,3 @@
-/*
-// Variable port setting for heroku
-
-var port = process.env.PORT || 3000;
-
-var app = require('express').createServer()
-var io = require('socket.io').listen(app);
-
-app.listen(port);
-
-// Heroku setting for long polling - assuming io is the Socket.IO server object
-io.configure(function () { 
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 10); 
-});
-
-// routing
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/roboclient.html');
-});
-
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-
-
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-    io.emit('chat message', msg);
-  });
-
-});
-
-*/
-
-
-
-
 // Variable port setting for heroku
 
 var port = process.env.PORT || 3000;
@@ -65,11 +23,28 @@ var usernames = {};
 
 io.sockets.on('connection', function (socket) {
 
-    console.log('a user connected');
+    // when the client emits 'adduser', this listens and executes
+    socket.on('adduser', function(username){
+        // we store the username in the socket session for this client
+        socket.username = username;
+        // add the client's username to the global list
+        usernames[username] = username;
+        // echo to client they've connected
+        socket.emit('updatechat', 'SERVER', 'you have connected');
+        // echo globally (all clients) that a person has connected
+        socket.broadcast.emit('updatechat', 'SERVER', username + ' has connected');
+        // update the list of users in chat, client-side
+        io.sockets.emit('updateusers', usernames);
+    });
 
 
     socket.on('disconnect', function(){
-      console.log('user disconnected');
+        // remove the username from global usernames list
+        delete usernames[socket.username];
+        // update list of users in chat, client-side
+        io.sockets.emit('updateusers', usernames);
+        // echo globally that this client has left
+        socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
     });
 
 
