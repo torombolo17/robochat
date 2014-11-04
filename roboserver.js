@@ -39,7 +39,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('chat message', function(msg){
       console.log('message: ' + msg);
-      io.sockets.emit('updatechat', socket.username, data);
+      io.sockets.emit('updatechat', socket.username, msg);
     });
 
     socket.on('disconnect', function(){
