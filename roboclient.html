@@ -29,7 +29,7 @@
     <script>
 
       var socket = io.connect();
-      var dataRef = new Firebase('https://robochat0.firebaseio.com/');
+      //var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
 
 
@@ -53,9 +53,9 @@
       });*/
 
       // on load of page
-      //$(function(){
+      $(function(){
 
-          dataRef.on('chiled_added', function(snapshot){
+          /*dataRef.on('chiled_added', function(snapshot){
             var msg = snapshot.val();
             displayChatMessage(msg.name, msg.message);
           });
@@ -63,7 +63,7 @@
 
           function displayChatMessage(name, message) {
             $('#messages').append($('<li>').text(name + ": " + message));
-          };
+          };*/
 
           socket.on('update chat', function(username, msg){
             $('#messages').append($('<li>').text(username + ": " + msg));
@@ -76,7 +76,7 @@
               // tell server to execute 'sendchat' and send along one parameter
               socket.emit('sendchat', message);
           });
-      //});
+      });
 
 
 

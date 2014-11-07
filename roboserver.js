@@ -7,7 +7,7 @@ var app = require('express').createServer();
 var io = require('socket.io').listen(app);
 var Firebase = require('firebase');
 
-var db = new Firebase('https://robochat0.firebaseio.com/')
+//var db = new Firebase('https://robochat0.firebaseio.com/')
 
 app.listen(port);
 
@@ -30,6 +30,7 @@ io.sockets.on('connection', function (socket) {
     // when the client emits 'sendchat', this listens and executes
     socket.on('sendchat', function (data) {
         // we tell the client to execute 'updatechat' with 2 parameters
+        //db.push({name: socket.username, message: data});
         io.sockets.emit('updatechat', socket.username, data);
     });
 
