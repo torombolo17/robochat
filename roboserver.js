@@ -43,6 +43,7 @@ io.sockets.on('connection', function (socket) {
 
 
     socket.on('chat message', function(msg){
+      db.push({name: socket.username, message: msg});
       console.log(socket.username + ' message: ' + msg);
       io.sockets.emit('update chat', socket.username, msg);
     });
