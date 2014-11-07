@@ -33,15 +33,15 @@
       };
 
       var socket = io.connect();
-      var dataRef = new Firebase('https://robochat0.firebaseio.com/')
+      var dataRef = new Firebase('https://robochat0.firebaseio.com/');
+
+      socket.on('connect', function(){
+        socket.emit('adduser', prompt("What's your name?"));
+      });
 
       dataRef.on('chiled_added', function(snapshot){
         var msg = snapshot.val();
         displayChatMessage(msg.name, msg.message);
-      });
-
-      socket.on('connect', function(){
-        socket.emit('adduser', prompt("What's your name?"));
       });
 
       $('form').submit(function(){
