@@ -28,18 +28,18 @@ var usernames = {};
 io.sockets.on('connection', function (socket) {
 
     socket.on('adduser', function(username){
-        // we store the username in the socket session for this client
-        socket.username = username;
-        // add the client's username to the global list
-        usernames[username] = username;
-        console.log(usernames[username] + " has connected");
-        io.socket.emit("chat message", " has connected");
+      // we store the username in the socket session for this client
+      socket.username = username;
+      // add the client's username to the global list
+      usernames[username] = username;
+      console.log(usernames[username] + " has connected");
+      socket.emit("chat message", " has connected");
     });
 
 
     socket.on('disconnect', function(){
       console.log(socket.username + ' has disconnected');
-      io.socket.emit("chat message", " has disconnected");
+      socket.emit("chat message", " has disconnected");
 
     });
 
@@ -47,7 +47,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('chat message', function(msg){
       db.push({name: socket.username, message: msg});
       console.log(socket.username + ' message: ' + msg);
-      io.sockets.emit('update chat', socket.username, msg);
+      sockets.emit('update chat', socket.username, msg);
     });
 
   
