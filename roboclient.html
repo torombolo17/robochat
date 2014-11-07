@@ -30,9 +30,7 @@
 
       socket.on('connect', function(){
         
-
-        var username = prompt("What's your name?");
-        socket.emit('adduser', username);
+        socket.emit('adduser', prompt("What's your name?"));
       });
 
       $('form').submit(function(){
@@ -41,8 +39,8 @@
         return false;
       });
 
-      socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
+      socket.on('update chat', function(username, msg){
+        $('#messages').append($('<li>').text(username + ": " + msg));
       });
 
     </script>
