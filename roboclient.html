@@ -25,10 +25,12 @@
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
     <script>
-      var socket = io.connect();
 
-      socket.on('connect', function(){
+      var socket = io.connect();
+      var dataRef = 
+      socket.on('connect', function(snapshot){
         
         socket.emit('adduser', prompt("What's your name?"));
       });
