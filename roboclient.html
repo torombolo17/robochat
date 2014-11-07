@@ -41,7 +41,7 @@
 
       // listener, whenever the server emits 'updatechat', this updates the chat body
       socket.on('updatechat', function (username, data) {
-          $('#messages').append('<b>' + username + ':</b> ' + data + '<br>');
+          $('#messages').append($('<li>').text(username + ": " + msg));
       });
 
       // listener, whenever the server emits 'updateusers', this updates the username list
@@ -53,7 +53,7 @@
       });*/
 
       // on load of page
-      $(function(){
+      //$(function(){
 
           dataRef.on('chiled_added', function(snapshot){
             var msg = snapshot.val();
@@ -65,6 +65,10 @@
             $('#messages').append($('<li>').text(name + ": " + message));
           };
 
+          socket.on('update chat', function(username, msg){
+            $('#messages').append($('<li>').text(username + ": " + msg));
+          });
+
           // when the client clicks SEND
           $('form').submit(function() {
               var message = $('#m').val();
@@ -72,7 +76,7 @@
               // tell server to execute 'sendchat' and send along one parameter
               socket.emit('sendchat', message);
           });
-      });
+      //});
 
 
 
