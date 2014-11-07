@@ -2,6 +2,8 @@
 
 var port = process.env.PORT || 3000;
 
+var fb = document.createElemnt('script');
+fb.src = 'https://cdn.firebase.com/js/client/1.1.1/firebase.js'
 var app = require('express').createServer();
 var io = require('socket.io').listen(app);
 
@@ -23,7 +25,13 @@ var usernames = {};
 
 io.sockets.on('connection', function (socket) {
 
-    console.log('a user connected');
+    socket.on('adduser', function(username){
+        // we store the username in the socket session for this client
+        socket.username = username;
+        // add the client's username to the global list
+        usernames[username] = username;
+        console.log(usernames[username] + " has connected");
+    });
 
 
     socket.on('disconnect', function(){

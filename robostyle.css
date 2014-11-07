@@ -1,0 +1,12 @@
+.box{
+	bottom: 0;
+}
+
+.content{
+	position:absolute;
+    bottom: 50px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    overflow-y:scroll;
+}
