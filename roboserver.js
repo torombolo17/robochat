@@ -33,13 +33,13 @@ io.sockets.on('connection', function (socket) {
         // add the client's username to the global list
         usernames[username] = username;
         console.log(usernames[username] + " has connected");
-        socket.emit("chat message", " has connected");
+        io.socket.emit("chat message", " has connected");
     });
 
 
     socket.on('disconnect', function(){
       console.log(socket.username + ' has disconnected');
-      socket.emit("chat message", " has disconnected");
+      io.socket.emit("chat message", " has disconnected");
 
     });
 
