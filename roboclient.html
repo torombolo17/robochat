@@ -28,9 +28,9 @@
     <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
     <script>
 
-      function displayChatMessage(name, message) {
-        $('#messages').append($('<li>').text(name + ": " + message));
-      };
+      //function displayChatMessage(name, message) {
+      //  $('#messages').append($('<li>').text(name + ": " + message));
+      //};
 
       var socket = io.connect();
       var dataRef = new Firebase('https://robochat0.firebaseio.com/');
@@ -39,10 +39,10 @@
         socket.emit('adduser', prompt("What's your name?"));
       });
 
-      dataRef.on('chiled_added', function(snapshot){
+      /*dataRef.on('chiled_added', function(snapshot){
         var msg = snapshot.val();
         displayChatMessage(msg.name, msg.message);
-      });
+      });*/
 
       $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
