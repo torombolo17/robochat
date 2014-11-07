@@ -28,31 +28,63 @@
     <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
     <script>
 
-      //function displayChatMessage(name, message) {
-      //  $('#messages').append($('<li>').text(name + ": " + message));
-      //};
-
       var socket = io.connect();
       var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
+
+
+      // on connection to server, ask for user's name with an anonymous callback
       socket.on('connect', function(){
-        socket.emit('adduser', prompt("What's your name?"));
+          // call the server-side function 'adduser' and send one parameter (value of prompt)
+          socket.emit('adduser', prompt("What's your name?"));
       });
 
-      /*dataRef.on('chiled_added', function(snapshot){
-        var msg = snapshot.val();
-        displayChatMessage(msg.name, msg.message);
+      // listener, whenever the server emits 'updatechat', this updates the chat body
+      socket.on('updatechat', function (username, data) {
+          $('#messages').append('<b>' + username + ':</b> ' + data + '<br>');
+      });
+
+      // listener, whenever the server emits 'updateusers', this updates the username list
+      /*socket.on('updateusers', function(data) {
+          $('#users').empty();
+          $.each(data, function(key, value) {
+              $('#users').append('<div>' + key + '</div>');
+          });
       });*/
 
-      $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
-        $('#m').val('');
-        return false;
+      // on load of page
+      $(function(){
+
+          dataRef.on('chiled_added', function(snapshot){
+            var msg = snapshot.val();
+            displayChatMessage(msg.name, msg.message);
+          });
+
+
+          function displayChatMessage(name, message) {
+            $('#messages').append($('<li>').text(name + ": " + message));
+          };
+
+          // when the client clicks SEND
+          $('form').submit(function() {
+              var message = $('#m').val();
+              $('#m').val('');
+              // tell server to execute 'sendchat' and send along one parameter
+              socket.emit('sendchat', message);
+          });
       });
 
-      socket.on('update chat', function(username, msg){
-        $('#messages').append($('<li>').text(username + ": " + msg));
-      });
+
+
+
+
+
+
+
+  
+
+
+
 
     </script>
 
