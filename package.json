@@ -4,7 +4,8 @@
      "version": "0.0.1",
      "dependencies": {
         "express": "2.4.6",
-        "socket.io": "0.8.4"
+        "socket.io": "0.8.4",
+        "firebase": "2.0.2"
      },
     "engines": {
     "node": "0.8.x",
