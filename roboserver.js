@@ -37,13 +37,14 @@ io.sockets.on('connection', function (socket) {
 
 
     socket.on('disconnect', function(){
-      console.log('user disconnected');
+      console.log(usernames[username] + ' has disconnected');
+
     });
 
 
     socket.on('chat message', function(msg){
-      console.log('message: ' + msg);
-      io.sockets.emit('chat message', msg);
+      console.log(usernames[username] + ' message: ' + msg);
+      io.sockets.emit('update chat', usernames[username], msg);
     });
 
   
