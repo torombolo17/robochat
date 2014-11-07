@@ -29,8 +29,14 @@
     <script>
 
       var socket = io.connect();
-      var dataRef = 
-      socket.on('connect', function(snapshot){
+      var dataRef = new Firebase('https://robochat0.firebaseio.com/')
+
+      dataRef.on('load history', function(snapshot){
+        var history = snapshot.val();
+        displayChatMessage(message.name, message.text);
+      });
+
+      socket.on('connect', function(){
         
         socket.emit('adduser', prompt("What's your name?"));
       });
