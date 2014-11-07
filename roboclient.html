@@ -26,13 +26,10 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      var dataRef = new Firebase('https://robochat0.firebaseio.com/')
       var socket = io.connect();
 
       socket.on('connect', function(){
-
         var username = prompt("What's your name?");
-
         socket.emit('adduser', username);
       });
 
