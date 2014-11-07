@@ -28,16 +28,19 @@
     <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
     <script>
 
+      function displayChatMessage(name, message) {
+        $('#messages').append($('<li>').text(name + ": " + message));
+      };
+
       var socket = io.connect();
       var dataRef = new Firebase('https://robochat0.firebaseio.com/')
 
-      dataRef.on('load history', function(snapshot){
-        var history = snapshot.val();
-        displayChatMessage(message.name, message.text);
+      dataRef.on('chiled_added', function(snapshot){
+        var msg = snapshot.val();
+        displayChatMessage(msg.name, msg.message);
       });
 
       socket.on('connect', function(){
-        
         socket.emit('adduser', prompt("What's your name?"));
       });
 
