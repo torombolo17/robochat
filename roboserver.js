@@ -37,7 +37,7 @@ io.sockets.on('connection', function (socket) {
 
 
     socket.on('disconnect', function(){
-      console.log(usernames[username] + ' has disconnected');
+      console.log(socket.username + ' has disconnected');
 
     });
 
