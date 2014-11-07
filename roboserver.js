@@ -7,7 +7,7 @@ var app = require('express').createServer();
 var io = require('socket.io').listen(app);
 var Firebase = require('firebase');
 
-var db = new Firebase('http://cdn.firebase.com/js/client/1.1.1/firebase.js')
+var db = new Firebase('https://robochat0.firebaseio.com/')
 
 app.listen(port);
 
