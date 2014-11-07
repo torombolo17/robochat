@@ -3,10 +3,11 @@
 
 var port = process.env.PORT || 3000;
 
-var fb = document.createElemnt('script');
-fb.src = 'http://cdn.firebase.com/js/client/1.1.1/firebase.js';
 var app = require('express').createServer();
 var io = require('socket.io').listen(app);
+var Firebase = require('firebase');
+
+var db = new Firebase('http://cdn.firebase.com/js/client/1.1.1/firebase.js')
 
 app.listen(port);
 
@@ -47,11 +48,3 @@ io.sockets.on('connection', function (socket) {
 
   
 });
-
-
-
-
-
-
-
-
