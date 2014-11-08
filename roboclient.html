@@ -1,98 +1,69 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Socket.IO chat</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
-  </head>
-
-  <body>
-    <div>
-      <ul id="messages"></ul>
-    </div>
-    <form action="">
-      <div>
-        <input id="m" autocomplete="off" /><button id = "send">Send</button>
-      </div>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
-    <script>
-
-      var socket = io.connect();
-      //var dataRef = new Firebase('https://robochat0.firebaseio.com/');
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
+<script>
+     var socket = io.connect();
+     //var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
 
 
-      // on connection to server, ask for user's name with an anonymous callback
-      socket.on('connect', function(){
-          // call the server-side function 'adduser' and send one parameter (value of prompt)
-          socket.emit('adduser', prompt("What's your name?"));
-      });
+    // on connection to server, ask for user's name with an anonymous callback
+    socket.on('connect', function(){
+        // call the server-side function 'adduser' and send one parameter (value of prompt)
+        socket.emit('adduser', prompt("What's your name?"));
+    });
 
-      // listener, whenever the server emits 'updatechat', this updates the chat body
-      socket.on('updatechat', function (username, data) {
-          $('#messages').append($('<li>').text(username + ": " + msg));
-      });
+    // listener, whenever the server emits 'updatechat', this updates the chat body
+    socket.on('updatechat', function (username, data) {
+        $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+    });
 
-      // listener, whenever the server emits 'updateusers', this updates the username list
-      /*socket.on('updateusers', function(data) {
-          $('#users').empty();
-          $.each(data, function(key, value) {
-              $('#users').append('<div>' + key + '</div>');
-          });
-      });*/
+    // listener, whenever the server emits 'updateusers', this updates the username list
+    socket.on('updateusers', function(data) {
+        $('#users').empty();
+        $.each(data, function(key, value) {
+            $('#users').append('<div>' + key + '</div>');
+        });
+    });
 
-      // on load of page
-      $(function(){
+    // on load of page
+    $(function(){
 
-          /*dataRef.on('chiled_added', function(snapshot){
-            var msg = snapshot.val();
-            displayChatMessage(msg.name, msg.message);
-          });
-
-
-          function displayChatMessage(name, message) {
-            $('#messages').append($('<li>').text(name + ": " + message));
-          };*/
-
-          socket.on('update chat', function(username, msg){
-            $('#messages').append($('<li>').text(username + ": " + msg));
-          });
-
-          // when the client clicks SEND
-          $('form').submit(function() {
-              var message = $('#m').val();
-              $('#m').val('');
-              // tell server to execute 'sendchat' and send along one parameter
-              socket.emit('sendchat', message);
-          });
+      /*dataRef.on('chiled_added', function(snapshot){
+          var msg = snapshot.val();
+          displayChatMessage(msg.name, msg.message);
       });
 
 
+      function displayChatMessage(name, message) {
+        $('#conversation').append('<b>'+ name + ':</b> ' + message + '<br>');
+      };*/
 
 
+        // when the client clicks SEND
+        $('#datasend').click( function() {
+            var message = $('#data').val();
+            $('#data').val('');
+            // tell server to execute 'sendchat' and send along one parameter
+            socket.emit('sendchat', message);
+        });
 
+        // when the client hits ENTER on their keyboard
+        $('#data').keypress(function(e) {
+            if(e.which == 13) {
+                $(this).blur();
+                $('#datasend').focus().click();
+            }
+        });
+    });
 
-
-
-  
-
-
-
-
-    </script>
-
-  </body>
-</html>
-
-
+</script>
+<div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
+    <b>USERS</b>
+    <div id="users"></div>
+</div>
+<div style="float:left;width:800px;height:300px;overflow:scroll-y;padding:10px;">
+    <div id="conversation"></div>
+    <input id="data" style="width:500px;" />
+    <input type="button" id="datasend" value="send" />
+</div>
