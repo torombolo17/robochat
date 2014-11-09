@@ -29,7 +29,7 @@
     // on load of page
     $(function(){
 
-      /*dataRef.on('chiled_added', function(snapshot){
+      dataRef.once('value', function(snapshot){
           var msg = snapshot.val();
           displayChatMessage(msg.name, msg.message);
       });
