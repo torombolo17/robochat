@@ -29,15 +29,10 @@
     // on load of page
     $(function(){
 
-      /*dataRef.on('chiled_added', function(snapshot){
+      dataRef.on('chiled_added', function(snapshot){
           var msg = snapshot.val();
-          displayChatMessage(msg.name, msg.message);
+          $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
       });
-
-
-      function displayChatMessage(name, message) {
-        $('#conversation').append('<b>'+ name + ':</b> ' + message + '<br>');
-      };*/
 
 
         // when the client clicks SEND
@@ -56,6 +51,10 @@
             }
         });
     });
+
+    function displayChatMessage(name, message) {
+        
+      };
 
 </script>
 <div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
