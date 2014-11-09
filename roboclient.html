@@ -3,7 +3,7 @@
 <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
 <script>
      var socket = io.connect();
-     var dataRef = new Firebase('https://robochat0.firebaseio.com/');
+     //var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
 
 
@@ -29,10 +29,15 @@
     // on load of page
     $(function(){
 
-      dataRef.on('chiled_added', function(snapshot){
+      /*dataRef.on('chiled_added', function(snapshot){
           var msg = snapshot.val();
-          $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
+          displayChatMessage(msg.name, msg.message);
       });
+
+
+      function displayChatMessage(name, message) {
+        $('#conversation').append('<b>'+ name + ':</b> ' + message + '<br>');
+      };*/
 
 
         // when the client clicks SEND
@@ -51,10 +56,6 @@
             }
         });
     });
-
-    function displayChatMessage(name, message) {
-        
-      };
 
 </script>
 <div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
