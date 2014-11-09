@@ -3,16 +3,14 @@
 <script src='https://cdn.firebase.com/js/client/1.1.1/firebase.js'></script>
 <script>
      var socket = io.connect();
-     var dataRef = new Firebase('https://robochat0.firebaseio.com/');
+     //var dataRef = new Firebase('https://robochat0.firebaseio.com/');
+
+
 
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
         // call the server-side function 'adduser' and send one parameter (value of prompt)
         socket.emit('adduser', prompt("What's your name?"));
-        dataRef.on('value', function(snapshot){
-          var msg = snapshot.val();
-          $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
-        });
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -30,6 +28,17 @@
 
     // on load of page
     $(function(){
+
+      /*dataRef.on('chiled_added', function(snapshot){
+          var msg = snapshot.val();
+          displayChatMessage(msg.name, msg.message);
+      });
+
+
+      function displayChatMessage(name, message) {
+        $('#conversation').append('<b>'+ name + ':</b> ' + message + '<br>');
+      };*/
+
 
         // when the client clicks SEND
         $('#datasend').click( function() {
