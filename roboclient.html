@@ -5,12 +5,11 @@
      var socket = io.connect();
      var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
-
-
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
-        dataRef.once('value', function(snapshot){
+        dataRef.on('value', function(snapshot){
           var msg = snapshot.val();
+          console.log('name: '+ msg.name+' msg: '+msg.message)
           $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
         });
         // call the server-side function 'adduser' and send one parameter (value of prompt)
