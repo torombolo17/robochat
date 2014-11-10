@@ -23,3 +23,8 @@ Visit the app at [http://robochat.herokuapp.com](http://robochat.herokuapp.com)
 * We store our data using [Firebase](https://www.firebase.com/).
 * [Express](http://expressjs.com/) framework.
 
+## What's next?
+
+We are currently fixing some bugs and after we have finished the basic app, we will
+implement accounts, private conversations and of course, the most important thing,
+an API that changes text to speach.
