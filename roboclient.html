@@ -6,11 +6,18 @@
      var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
 
+    function AskName(){
+        nickname = prompt("What's your name?")
+        while nickname != ''{
+            nickname = prompt("That isn't your name. What's your name?")
+        }
+        return nickname
+    }
 
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
         // call the server-side function 'adduser' and send one parameter (value of prompt)
-        socket.emit('adduser', prompt("What's your name?"));
+        socket.emit('adduser', AskName());
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -40,7 +47,7 @@
             });
         }
     });
-    
+
 
     // on load of page
     $(function(){
