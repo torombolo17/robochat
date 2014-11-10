@@ -16,8 +16,9 @@
 
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
+        name = GetName();
         // call the server-side function 'adduser' and send one parameter (value of prompt)
-        socket.emit('adduser', GetName());
+        socket.emit('adduser', name;
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
