@@ -11,13 +11,6 @@
     socket.on('connect', function(){
         // call the server-side function 'adduser' and send one parameter (value of prompt)
         socket.emit('adduser', prompt("What's your name?"));
-        dataRef.once('value', function(snapshot){
-        if(snapshot.hasChildren()){
-            snapshot.forEach(function(snapChild))
-            var msg = snapChild.val();
-            $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
-        }
-    });
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -31,6 +24,15 @@
         $.each(data, function(key, value) {
             $('#users').append('<div>' + key + '</div>');
         });
+    });
+
+    dataRef.once('value', function(snapshot){
+        if(snapshot.hasChildren()){
+            snapshot.forEach(function(snapChild){
+                var msg = snapChild.val();
+                $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
+            });
+        }
     });
 
     
