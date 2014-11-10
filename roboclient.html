@@ -6,19 +6,18 @@
      var dataRef = new Firebase('https://robochat0.firebaseio.com/');
 
 
-    function AskName(){
-        var nickname = prompt("What's your name?")
-        while nickname != null{
-            nickname = prompt("That isn't your name. What's your name?")
+     function GetName(){
+        var nickname = prompt("What's your name?");
+        while(nickname == null){
+            nickname = prompt("That's not a name. What's your name?");
         }
-        return nickname
-    }
+        return nickname;
+     }
 
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
-        var nickname = AskName()
         // call the server-side function 'adduser' and send one parameter (value of prompt)
-        socket.emit('adduser', nickname;
+        socket.emit('adduser', GetName());
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -42,13 +41,14 @@
             // every item on the database has a child (name and message) so for each child
             // we will do the following function
             snapshot.forEach(function(snapChild){
-                // get the values of the children and append to the conversation the name and message
+                // get the values of the name and message of the child and add them to the conversation
                 var msg = snapChild.val();
                 $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
             });
         }
     });
 
+    
 
     // on load of page
     $(function(){
