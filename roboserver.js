@@ -27,6 +27,15 @@ io.sockets.on('connection', function (socket) {
 
     // when the client emits 'sendchat', this listens and executes
     socket.on('sendchat', function (data) {
+        // if the username is empty its because he canceled the prompt
+        // so we can't let him post a message unless he puts a name
+        if(socket.username == null || socket.username == ""){
+            while(socket.username == null){
+                var username = prompt("You dont have a name. Enter a name!");
+            }
+            socket.emit('adduser', username)
+        }
+
         // we tell the client to execute 'updatechat' with 2 parameters
         io.sockets.emit('updatechat', socket.username, data);
         db.push({name: socket.username, message: data});
