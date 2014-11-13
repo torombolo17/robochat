@@ -7,21 +7,22 @@
 
      // this function is to ask the user for his/her name
      function GetName(){
+        
         // first time ask for his name the nice way
-        var nickname = prompt("What's your name?");
+        var username = prompt("What's your name?");
         // if he doesn't put at leas a single character, then we have to ask the hard way
-        while(nickname == ""){
-            nickname = prompt("That's not a name. What's your name?");
+        while(username == null || jQuery.trim(username).length == 0){
+            username = prompt("That's not a name. What's your name?");
         }
         // return whatever they typed
-        return nickname;
+        return username;
+
      }
 
     // on connection to server, ask for user's name with an anonymous callback
     socket.on('connect', function(){
-        name = GetName();
         // call the server-side function 'adduser' and send one parameter (value of prompt)
-        socket.emit('adduser', name);
+        socket.emit('adduser', GetName());
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
