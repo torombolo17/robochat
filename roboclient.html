@@ -27,7 +27,7 @@
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
     socket.on('updatechat', function (username, data, voice) {
-        $('#conversation').append('<b>'+username + ':</b> ' + data + '<br> <audio controls><source src='+voice+' type="audio/mpeg"></audio>');
+        $('#conversation').append('<b>'+username + ':</b> ' + data + '<br> ');//<audio controls><source src='+voice+' type="audio/mpeg"></audio>
     });
 
     // listener, whenever the server emits 'updateusers', this updates the username list
@@ -48,7 +48,7 @@
             snapshot.forEach(function(snapChild){
                 // get the values of the name and message of the child and add them to the conversation
                 var msg = snapChild.val();
-                $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br><audio controls><source src='+msg.voice+' type="audio/mpeg"></audio>');
+                $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
             });
         }
     });
