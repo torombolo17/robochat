@@ -5,7 +5,8 @@
      "dependencies": {
         "express": "2.4.6",
         "socket.io": "0.8.4",
-        "firebase": "2.0.2"
+        "firebase": "2.0.2",
+        "unirest": "0.3.0"
      },
     "engines": {
     "node": "0.8.x",

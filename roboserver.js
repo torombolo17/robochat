@@ -4,6 +4,7 @@ var port = process.env.PORT || 3000;
 
 var app = require('express').createServer()
 var io = require('socket.io').listen(app);
+var unirest = require('unirest');
 var Firebase = require('firebase');
 var db = new Firebase('https://robochat0.firebaseio.com/');
 
@@ -27,18 +28,10 @@ io.sockets.on('connection', function (socket) {
 
     // when the client emits 'sendchat', this listens and executes
     socket.on('sendchat', function (data) {
-        // if the username is empty its because he canceled the prompt
-        // so we can't let him post a message unless he puts a name
-        /*if(socket.username == null || socket.username == ""){
-            while(socket.username == null){
-                var username = prompt("You dont have a name. Enter a name!");
-            }
-            socket.emit('adduser', username)
-        }*/
-
+        voice = unirest.post("https://api.voicerss.org/??key=116c3dfac5c3487b94014be533051b0e&src="+data+"&hl=en-us")
         // we tell the client to execute 'updatechat' with 2 parameters
-        io.sockets.emit('updatechat', socket.username, data);
-        db.push({name: socket.username, message: data});
+        io.sockets.emit('updatechat', socket.username, data, voice);
+        db.push({name: socket.username, message: data, voice: voice});
     });
 
     // when the client emits 'adduser', this listens and executes
