@@ -4,7 +4,7 @@ var port = process.env.PORT || 3000;
 
 var app = require('express').createServer()
 var io = require('socket.io').listen(app);
-var unirest = require('unirest');
+//var unirest = require('unirest');
 var Firebase = require('firebase');
 var db = new Firebase('https://robochat0.firebaseio.com/');
 
