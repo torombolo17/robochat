@@ -33,7 +33,7 @@ io.sockets.on('connection', function (socket) {
         if(typeof(voice) !== 'undefined'){
             console.log("No es undefined");
             console.log(typeof(voice));
-            console.log(voice);
+            console.log("Es aqui donde se imprime el objeto" + voice + "!!!!!!!!");
         }else{
             console.log("Es undefined");
         }
