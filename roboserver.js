@@ -33,6 +33,7 @@ io.sockets.on('connection', function (socket) {
         if(typeof(voice) !== 'undefined'){
             console.log("No es undefined");
             console.log(typeof(voice));
+            console.log(voice);
         }else{
             console.log("Es undefined");
         }
