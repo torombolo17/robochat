@@ -27,7 +27,7 @@
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
     socket.on('updatechat', function (username, data, voice) {
-        $('#conversation').append('<b>'+username + ':</b> <audio controls><source src='+voice+' type="audio/mpeg"></audio><br> ');
+        $('#conversation').append('<b>'+username + ':</b> <audio controls><source src="' + voice + '" type="audio/mpeg"></audio><br> ');
     });
 
     // listener, whenever the server emits 'updateusers', this updates the username list
