@@ -29,7 +29,7 @@
     socket.on('updatechat', function (username, text) {
 
         $.get("https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src=" + text + "&hl=en-us",function(data){
-            alert("Succesful");
+            alert("Succesful! Data type: " + typeof(data));
             $('#conversation').append('<b>'+ username + ':</b> <audio controls><source src="' + data +'" type="audio/mpeg"></audio><br> ');
         });
 
