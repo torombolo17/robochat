@@ -36,7 +36,7 @@ io.sockets.on('connection', function (socket) {
             xmlHttp = new XMLHttpRequest();
             xmlHttp.open( "GET", theUrl, false );
             xmlHttp.send( null );
-            return xmlHttp.responseText;
+            return xmlHttp.responseXML;
         }
         // var voice = unirest.get("https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src="+data+"&hl=en-us");
 
