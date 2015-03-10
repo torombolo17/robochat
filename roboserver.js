@@ -8,6 +8,7 @@ var unirest = require('unirest');
 var Firebase = require('firebase');
 var db = new Firebase('https://robochat0.firebaseio.com/');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var xhr = new XMLHttpRequest();
 
 app.listen(port);
 
@@ -32,12 +33,9 @@ io.sockets.on('connection', function (socket) {
         url = "https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src="+data+"&hl=en-us"
         function httpGet(theUrl)
         {
-            var xmlHttp = null;
-
-            xmlHttp = new XMLHttpRequest();
-            xmlHttp.open( "GET", theUrl, false );
-            xmlHttp.send( null );
-            return xmlHttp.responseXML;
+            xhr.open( "GET", theUrl, false );
+            xhr.send( null );
+            return xhr.responseXML;
         }
         // var voice = unirest.get("https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src="+data+"&hl=en-us");
 
