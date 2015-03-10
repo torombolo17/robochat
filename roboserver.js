@@ -28,7 +28,7 @@ io.sockets.on('connection', function (socket) {
 
     // when the client emits 'sendchat', this listens and executes
     socket.on('sendchat', function (data) {
-        /*var voice = unirest.get("https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src="+data+"&hl=en-us");
+        var voice = unirest.get("https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src="+data+"&hl=en-us");
 
         if(typeof(voice) !== 'undefined'){
             console.log("No es undefined");
@@ -39,7 +39,7 @@ io.sockets.on('connection', function (socket) {
         }*/
 
         // we tell the client to execute 'updatechat' with 2 parameters
-        io.sockets.emit('updatechat', socket.username, data);
+        io.sockets.emit('updatechat', socket.username, data, voice);
         db.push({name: socket.username, message: data});
     });
 

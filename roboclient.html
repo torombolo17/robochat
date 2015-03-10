@@ -26,14 +26,14 @@
     });
 
     // listener, whenever the server emits 'updatechat', this updates the chat body
-    socket.on('updatechat', function (username, text) {
+    socket.on('updatechat', function (username, text, voice) {
 
         $.get("https://api.voicerss.org/?key=116c3dfac5c3487b94014be533051b0e&src=" + text + "&hl=en-us",function(data){
             alert("Succesful! Data type: " + typeof(data));
             $('#conversation').append('<b>'+ username + ':</b> <audio controls><source src="' + data +'" type="audio/mpeg"></audio><br> ');
         });
 
-        //$('#conversation').append('<b>'+username + ':</b> <audio controls><source src="' + voice +'" type="audio/mpeg"></audio><br> ');
+        $('#conversation').append('<b>'+username + ':</b> <audio src="' + voice +'" type="audio/mpeg"></audio><br> ');
     });
 
     // listener, whenever the server emits 'updateusers', this updates the username list
