@@ -7,8 +7,6 @@
         "socket.io": "0.8.4",
         "firebase": "2.0.2",
         "unirest": "0.3.0",
-        "unirest": "0.3.0",
-        "unirest": "0.3.0",
         "xmlhttprequest": "1.7.0"
      },
     "engines": {
