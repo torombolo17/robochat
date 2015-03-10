@@ -36,7 +36,7 @@ io.sockets.on('connection', function (socket) {
             console.log("Es aqui donde se imprime el objeto" + voice + "!!!!!!!!");
         }else{
             console.log("Es undefined");
-        }*/
+        }
 
         // we tell the client to execute 'updatechat' with 2 parameters
         io.sockets.emit('updatechat', socket.username, data, voice);
