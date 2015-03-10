@@ -7,6 +7,7 @@ var io = require('socket.io').listen(app);
 var unirest = require('unirest');
 var Firebase = require('firebase');
 var db = new Firebase('https://robochat0.firebaseio.com/');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 app.listen(port);
 
