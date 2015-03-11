@@ -31,6 +31,10 @@
         $('#conversation').append('<b>'+username + ':</b> <audio controls autoplay><source src=http://tts-api.com/tts.mp3?q='+text+' type="audio/mpeg"></audio><br> ');
     });
 
+    socket.on('clearchat', function(){
+        location.reload();
+    });
+
     // listener, whenever the server emits 'updateusers', this updates the username list
     socket.on('updateusers', function(data) {
         $('#users').empty();
@@ -68,6 +72,16 @@
             socket.emit('sendchat', message);
         });
 
+        // when the client clicks DELETE
+        $('#delete').click( function() {
+            if (confirm('Are you sure you want to delete the conversation?')) {
+                socket.emit('deleteconv');
+            } 
+            else {
+                
+            }
+        });
+
         // when the client hits ENTER on their keyboard
         $('#data').keypress(function(e) {
             if(e.which == 13) {
@@ -81,6 +95,7 @@
 <div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
     <b>USERS</b>
     <div id="users"></div>
+    <input type="button" id="datasend" value="send" />
 </div>
 <div style="float:left;width:800px;height:300px;overflow:scroll-y;padding:10px;">
     <div id="conversation"></div>
