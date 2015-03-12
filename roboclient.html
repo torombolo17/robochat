@@ -32,7 +32,19 @@
     });
 
     socket.on('clearchat', function(){
-        location.reload();
+        dataRef.once('value', function(snapshot){
+        // if the snapshot has children (in simple words.. if we have items on our database)
+        // then we will enter this function
+        if(snapshot.hasChildren()){
+            // every item on the database has a child (name and message) so for each child
+            // we will do the following function
+            snapshot.forEach(function(snapChild){
+                // get the values of the name and message of the child and add them to the conversation
+                var msg = snapChild.val();
+                $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
+            });
+        }
+    });
     });
 
     // listener, whenever the server emits 'updateusers', this updates the username list
