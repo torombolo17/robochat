@@ -53,7 +53,7 @@
             snapshot.forEach(function(snapChild){
                 // get the values of the name and message of the child and add them to the conversation
                 var msg = snapChild.val();
-                $('#conversation').append('<b>'+ msg.name + ':</b> ' + msg.message + '<br>');
+                $('#conversation').append('<b>'+msg.name + ':</b> <audio controls autoplay><source src=http://tts-api.com/tts.mp3?q='+msg.message+' type="audio/mpeg"></audio><br> ');
             });
         }
     });
