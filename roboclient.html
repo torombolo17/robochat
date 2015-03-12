@@ -9,7 +9,7 @@
      function GetName(){
         
         // first time ask for his name the nice way
-        var username = prompt("What's your name?").replace("<", "&lt;");;
+        var username = prompt("What's your name?").replace("<", "&lt;");
         // if he doesn't put at leas a single character, then we have to ask the hard way
         while(username == null || jQuery.trim(username).length == 0){
             username = prompt("That's not a name. What's your name?");
